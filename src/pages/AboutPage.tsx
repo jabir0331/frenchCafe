@@ -51,7 +51,8 @@ const AboutPage = () => {
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-cafe-gold/30 to-cafe-wine/30 rounded-3xl blur-xl"></div>
             <img
-              src="https://images.pexels.com/photos/1307698/pexels-photo-1307698.jpeg?auto=compress&cs=tinysrgb&w=800"
+              // src="https://images.pexels.com/photos/1307698/pexels-photo-1307698.jpeg?auto=compress&cs=tinysrgb&w=800"
+              src="images/aboutImg4.jpg"
               alt="Café interior"
               className="relative rounded-3xl shadow-3xl w-full h-[600px] object-cover transform hover:scale-105 transition-transform duration-700 border-4 border-white"
             />
