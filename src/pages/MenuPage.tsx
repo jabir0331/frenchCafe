@@ -151,16 +151,10 @@ const MenuPage = () => {
                     </div>
                   </div>
                   <div className="ml-8 flex flex-col items-end space-y-3">
-                    <span className="font-sans text-3xl font-bold text-cafe-wine bg-gradient-to-r from-cafe-cream/80 to-cafe-gold/20 px-6 py-3 rounded-2xl group-hover:from-cafe-gold/30 group-hover:to-cafe-wine/20 transition-all duration-500 shadow-lg border border-cafe-gold/20">
+                    <span className="font-sans text-2xl font-bold text-cafe-wine bg-gradient-to-r from-cafe-cream/80 to-cafe-gold/20 px-6 py-3 rounded-2xl group-hover:from-cafe-gold/30 group-hover:to-cafe-wine/20 transition-all duration-500 shadow-lg border border-cafe-gold/20">
                       {item.price}
                     </span>
-                    {item.popular && (
-                      <div className="flex space-x-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 text-cafe-gold fill-current" />
-                        ))}
-                      </div>
-                    )}
+                    
                   </div>
                 </div>
               ))}
