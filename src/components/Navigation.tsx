@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menu, X, Coffee, Sparkles } from 'lucide-react';
 
 const Navigation = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeItem, setActiveItem] = useState('/');
@@ -24,6 +26,7 @@ const Navigation = () => {
   ];
 
   const handleNavClick = (path: string) => {
+    navigate(path);
     setActiveItem(path);
     setIsOpen(false);
   };
