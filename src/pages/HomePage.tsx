@@ -1,21 +1,45 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Clock, Heart, Coffee, Award, Users } from 'lucide-react';
+import { useRef, useEffect } from 'react';
+import { ArrowRight, Star, Clock, Heart, Users } from 'lucide-react';
 
 const HomePage = () => {
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5; // Slow down to 50% speed
+    }
+  }, []);
+
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div
+        {/* <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             // backgroundImage: 'url("https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=1920")',
-            backgroundImage: 'url("/images/heroTest3.jpg")',
+            backgroundImage: 'url("/images/heroVideo.mp4")',
           }}
         >
           
           <div className="absolute inset-0 bg-black/25"></div>
-        </div>
+        </div> */}
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/videos/hero.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/25"></div>
 
         {/* Floating decorative elements */}
         <div className="absolute top-20 left-20 w-32 h-32 bg-cafe-gold/20 rounded-full blur-2xl animate-pulse"></div>
@@ -24,7 +48,7 @@ const HomePage = () => {
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
 
           <h1 className="font-serif md:text-8xl font-bold mt-20 mb-5 animate-slide-up bg-gradient-to-r from-white via-cafe-cream to-white bg-clip-text text-transparent leading-tight">
-            French Cafe
+            Cafe Lumière
           </h1>
           <p className="font-sans text-2xl md:text-3xl mb-4 text-cafe-cream/95 max-w-3xl mx-auto leading-relaxed font-light">
             Authentic French Cafe Experience
@@ -69,7 +93,7 @@ const HomePage = () => {
           <div className="text-left mb-20">
 
             <h2 className="font-serif md:text-4xl font-bold text-cafe-navy mb-2 leading-tight">
-              Why Choose French Cafe?
+              Why Choose Cafe Lumière?
             </h2>
             <p className="font-sans text-xl text-gray-600 max-w-5xl leading-relaxed">
               An authentic French experience that transports you to the heart of Paris

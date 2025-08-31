@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Coffee, Croissant, Utensils, Clock, Star, Award } from 'lucide-react';
+import { Coffee, Croissant, Utensils, Clock, Star, Sandwich } from 'lucide-react';
 
 const MenuPage = () => {
   const [activeCategory, setActiveCategory] = useState('coffee');
@@ -29,7 +29,7 @@ const MenuPage = () => {
     },
     breakfast: {
       name: 'Breakfast',
-      icon: Utensils,
+      icon: Sandwich,
       items: [
         { name: 'Avocado Toast', description: 'Grilled artisan bread, avocado, tomato, poached egg', price: 'LKR 1,200', popular: true, image: '/images/menu/breakfast/avocadoToast.jpg' },
         { name: 'French Omelette', description: 'Herb omelette with fresh green salad and toast', price: 'LKR 950', popular: false, image: '/images/menu/breakfast/frenchOmelette.jpg' },
@@ -79,8 +79,8 @@ const MenuPage = () => {
               <button
                 key={key}
                 onClick={() => setActiveCategory(key)}
-                className={`group relative px-20 py-5 rounded-2xl font-sans font-bold text-lg transition-all duration-500 transform hover:scale-110 shadow-xl hover:shadow-2xl border-2 ${activeCategory === key
-                  ? 'bg-gradient-to-r from-cafe-wine via-cafe-wine to-cafe-wine/90 text-white shadow-2xl border-cafe-wine/50 scale-110'
+                className={`group relative px-20 py-5 rounded-2xl font-sans font-bold text-lg transition-all duration-500 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 ${activeCategory === key
+                  ? 'bg-gradient-to-r from-cafe-wine via-cafe-wine to-cafe-wine/90 text-white shadow-2xl border-cafe-wine/50 scale-105'
                   : 'bg-white text-cafe-navy hover:bg-gradient-to-r hover:from-cafe-gold/20 hover:to-cafe-wine/10 hover:text-cafe-wine border-cafe-cream hover:border-cafe-gold/50'
                   }`}
               >
@@ -98,7 +98,7 @@ const MenuPage = () => {
         </div>
 
         {/* Enhanced Menu Items */}
-        <div className="bg-gradient-to-br from-white via-white to-cafe-cream/20 rounded-3xl shadow-3xl p-12 md:p-16 border-2 border-cafe-cream/50 backdrop-blur-sm relative overflow-hidden">
+        <div className="bg-gradient-to-br from-white via-white to-cafe-cream/20 rounded-3xl shadow-3xl p-10 md:p-10 border-3 border-cafe-cream/50 backdrop-blur-sm relative overflow-hidden">
           {/* Background pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-10 left-10 w-32 h-32 border border-cafe-gold rounded-full"></div>

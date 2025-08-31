@@ -1,5 +1,4 @@
-import React from 'react';
-import { Coffee, MapPin, Phone, Mail, Instagram, Facebook, Twitter } from 'lucide-react';
+import { Coffee, Instagram, Facebook, Twitter, MapPin, Phone, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -13,17 +12,17 @@ const Footer = () => {
               <span className="font-serif text-2xl font-bold">Café Lumière</span>
             </div>
             <p className="text-cafe-cream/80 font-sans leading-relaxed mb-6">
-              Experience the authentic French café culture in the heart of the city. 
+              Experience the authentic French cafe culture in the heart of Colombo. 
               Savor our artisanal specialties in a warm and welcoming atmosphere.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-cafe-cream hover:text-cafe-gold transition-colors duration-300">
+              <a href="https://www.instagram.com/lumierecafe_broadway/?hl=en" className="text-cafe-cream hover:text-cafe-gold transition-colors duration-300">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-cafe-cream hover:text-cafe-gold transition-colors duration-300">
+              <a href="https://www.facebook.com/p/Lumiere-Cafe-100087144402162/" className="text-cafe-cream hover:text-cafe-gold transition-colors duration-300">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-cafe-cream hover:text-cafe-gold transition-colors duration-300">
+              <a href="https://x.com/lumierechelt" className="text-cafe-cream hover:text-cafe-gold transition-colors duration-300">
                 <Twitter className="h-5 w-5" />
               </a>
             </div>
@@ -43,19 +42,24 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-serif text-lg font-semibold mb-4 text-cafe-gold">Contact</h3>
-            <div className="space-y-3 font-sans">
-              <div className="flex items-center space-x-3">
-                  <span className="text-cafe-cream/80">123 Lumière Street, Downtown</span>
-                <span className="text-cafe-cream/80">123 Rue de la Paix, Paris</span>
+            <h3 className="font-serif text-lg font-semibold mb-4 text-cafe-gold">Contact Us</h3>
+            <div className="space-y-5 font-sans">
+              <div className="flex items-center space-x-4">
+                  <MapPin size ={28}/>
+                  <span className="text-cafe-cream/80">
+                    No. 12, Alfred House Avenue,
+                    Colombo 03
+                  </span>
+                
               </div>
-              <div className="flex items-center space-x-3">
-                  <span className="text-cafe-cream/80">(555) 123-4567</span>
-                <span className="text-cafe-cream/80">+33 1 42 86 87 88</span>
+              <div className="flex items-center space-x-4">
+                  <Phone size ={20}/>
+                  <span className="text-cafe-cream/80">+94 75 746 42 09</span>
+                
               </div>
-              <div className="flex items-center space-x-3">
-                  <span className="text-cafe-cream/80">hello@cafelumiere.com</span>
-                <span className="text-cafe-cream/80">hello@cafelumiere.fr</span>
+              <div className="flex items-center space-x-4">
+                  <Mail size ={20}/>
+                  <span className="text-cafe-cream/80">info@cafelumiere.com</span>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, Camera, Heart, Star, Award } from 'lucide-react';
+import { useState } from 'react';
+import { X, Camera} from 'lucide-react';
 
 const GalleryPage = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);

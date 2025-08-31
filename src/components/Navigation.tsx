@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menu, X, Coffee, Sparkles } from 'lucide-react';
 
@@ -18,11 +18,11 @@ const Navigation = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
     { name: 'Menu', path: '/menu' },
-    { name: 'About', path: '/about' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Reservations', path: '/reservation' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Contact Us', path: '/contact' },
   ];
 
   const handleNavClick = (path: string) => {
@@ -32,16 +32,13 @@ const Navigation = () => {
   };
 
   return (
-    <nav 
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled 
-          ? 'bg-cafe-navy/95 backdrop-blur-md shadow-4xl' 
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled
+          ? 'bg-cafe-navy/95 backdrop-blur-md shadow-4xl'
           : 'bg-gradient-to-r from-cafe-navy/80 via-cafe-navy/70 to-cafe-navy/60 backdrop-blur-sm'
-      }`}
+        }`}
     >
-      {/* Animated top border */}
-      <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-cafe-gold via-cafe-gold-light to-cafe-wine opacity-80"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           {/* Logo Section */}
@@ -53,7 +50,7 @@ const Navigation = () => {
               </div>
               <div className="flex flex-col">
                 <span className="font-serif text-2xl font-bold text-cafe-cream group-hover:text-cafe-gold-light transition-colors duration-300">
-                  Café Lumière
+                  Cafe Lumière
                 </span>
                 <span className="font-sans text-xs text-cafe-gold/80 tracking-widest uppercase">
                   Premium Coffee Experience
@@ -68,11 +65,10 @@ const Navigation = () => {
               <button
                 key={item.path}
                 onClick={() => handleNavClick(item.path)}
-                className={`font-sans text-sm font-medium transition-all duration-300 hover:text-cafe-gold-light relative ${
-                  activeItem === item.path 
-                    ? 'text-cafe-gold-light' 
+                className={`font-sans text-sm font-medium transition-all duration-300 hover:text-cafe-gold-light relative ${activeItem === item.path
+                    ? 'text-cafe-gold-light'
                     : 'text-cafe-cream'
-                }`}
+                  }`}
               >
                 {item.name}
                 {activeItem === item.path && (
@@ -97,34 +93,35 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ${
-          isOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-        }`}>
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+          }`}>
           <div className="px-2 pt-4 pb-6 space-y-2 bg-gradient-to-b from-cafe-navy/90 to-cafe-navy/95 backdrop-blur-md rounded-b-2xl mt-2">
             {navItems.map((item, index) => (
               <button
                 key={item.path}
                 onClick={() => handleNavClick(item.path)}
-                className={`block w-full text-left px-6 py-4 text-base font-medium transition-all duration-300 rounded-xl transform hover:scale-105 hover:translate-x-2 ${
-                  activeItem === item.path 
-                    ? 'text-cafe-navy bg-gradient-to-r from-cafe-gold-light to-cafe-gold shadow-lg' 
+                className={`block w-full text-left px-6 py-4 text-base font-medium transition-all duration-300 rounded-xl transform hover:scale-105 hover:translate-x-2 ${activeItem === item.path
+                    ? 'text-cafe-navy bg-gradient-to-r from-cafe-gold-light to-cafe-gold shadow-lg'
                     : 'text-cafe-cream hover:text-cafe-gold-light hover:bg-cafe-gold/20'
-                }`}
+                  }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-center space-x-3">
-                  <span className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    activeItem === item.path 
-                      ? 'bg-cafe-navy animate-pulse' 
+                  <span className={`w-2 h-2 rounded-full transition-all duration-300 ${activeItem === item.path
+                      ? 'bg-cafe-navy animate-pulse'
                       : 'bg-cafe-gold/40'
-                  }`}></span>
+                    }`}></span>
                   <span>{item.name}</span>
                 </div>
               </button>
             ))}
           </div>
         </div>
+
+        {/* Animated bottom border */}
+        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-cafe-gold via-cafe-gold-light to-cafe-wine opacity-80"></div>
       </div>
+
 
       {/* Coffee bean decorative elements */}
       <div className="absolute top-2 left-1/4 w-1 h-1 bg-cafe-gold/30 rounded-full animate-pulse"></div>

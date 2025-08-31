@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import { Calendar, Clock, Users, User, Phone, Mail, Send, CheckCircle } from 'lucide-react';
+import { Calendar, Clock, Users, User, Phone, Mail, Send, CheckCircle, AlertCircle, X } from 'lucide-react';
 
 interface FormData {
   name: string;
@@ -23,7 +23,7 @@ interface TimeSlot {
   label: string;
 }
 
-type SubmitStatus = 'idle' | 'success';
+type SubmitStatus = 'idle' | 'success' | 'validation_error';
 
 const ReservationPage: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -39,6 +39,7 @@ const ReservationPage: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle');
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   // Opening hours data
   const hoursData: HoursData[] = [
@@ -131,8 +132,50 @@ const ReservationPage: React.FC = () => {
     return false;
   };
 
+  // Validate form
+  const validateForm = (): string[] => {
+    const errors: string[] = [];
+    
+    if (!formData.name.trim()) {
+      errors.push('Full Name is required');
+    }
+    
+    if (!formData.email.trim()) {
+      errors.push('Email Address is required');
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.push('Please enter a valid email address');
+    }
+    
+    if (!formData.phone.trim()) {
+      errors.push('Phone Number is required');
+    }
+    
+    if (!formData.date) {
+      errors.push('Preferred Date is required');
+    }
+    
+    if (!formData.time) {
+      errors.push('Preferred Time is required');
+    }
+    
+    if (!formData.guests) {
+      errors.push('Number of Guests is required');
+    }
+    
+    return errors;
+  };
+
   const handleSubmit = (e: FormEvent<HTMLButtonElement>): void => {
     e.preventDefault();
+    
+    const errors = validateForm();
+    
+    if (errors.length > 0) {
+      setValidationErrors(errors);
+      setSubmitStatus('validation_error');
+      return;
+    }
+    
     setIsSubmitting(true);
 
     // Simulate form submission
@@ -170,6 +213,11 @@ const ReservationPage: React.FC = () => {
       [name]: value,
       time: '' // Reset time when date changes
     }));
+  };
+
+  const closeModal = (): void => {
+    setSubmitStatus('idle');
+    setValidationErrors([]);
   };
 
   return (
@@ -219,18 +267,6 @@ const ReservationPage: React.FC = () => {
             <div className="absolute top-10 left-10 w-32 h-32 border border-amber-400 rounded-full"></div>
             <div className="absolute bottom-10 right-10 w-24 h-24 border border-red-800 rounded-full"></div>
           </div>
-
-          {/* <div className="bg-gradient-to-r from-slate-800 via-slate-800/95 to-red-800/90 p-10 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-red-800/20 to-amber-400/20"></div>
-            <div className="absolute top-0 left-0 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 right-0 w-48 h-48 bg-red-800/10 rounded-full blur-3xl"></div>
-
-            <div className="relative z-10">
-              <p className="font-sans text-amber-50/90 text-xl relative z-10 max-w-4xl mx-auto">
-                Fill out the form below to secure your perfect table in our authentic French café
-              </p>
-            </div>
-          </div> */}
 
           <div className="p-16 md:p-20 space-y-12 relative z-10">
             {/* Personal Information Section */}
@@ -292,7 +328,7 @@ const ReservationPage: React.FC = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-6 py-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-amber-400/30 focus:border-amber-400 transition-all duration-500 font-sans text-lg shadow-lg hover:shadow-xl bg-gradient-to-r from-white to-amber-50/20 group-hover:border-amber-400/50"
-                    placeholder="(123) 456-7890"
+                    placeholder="077 123 4567"
                   />
                 </div>
               </div>
@@ -447,7 +483,15 @@ const ReservationPage: React.FC = () => {
       {/* Success Popup Modal */}
       {submitStatus === 'success' && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl">
+          <div className="bg-white rounded-2xl p-8 max-w-xl w-full mx-4 shadow-2xl relative">
+            {/* Close button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+            
             <div className="text-center">
               <div className="flex justify-center mb-4">
                 <CheckCircle className="w-16 h-16 text-green-600" />
@@ -456,14 +500,49 @@ const ReservationPage: React.FC = () => {
                 Reservation Sent!
               </h3>
               <p className="font-sans text-slate-600 mb-6">
-                Your reservation request has been submitted successfully! We'll contact you soon to confirm your booking.
+                Your reservation request has been submitted successfully! <br />
+                We'll contact you soon to confirm your booking.
               </p>
-              <button
-                onClick={() => setSubmitStatus('idle')}
-                className="bg-slate-600 text-white px-6 py-3 rounded-lg font-sans font-semibold hover:bg-slate-700 transition-colors duration-200"
-              >
-                Close
-              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Validation Error Popup Modal */}
+      {submitStatus === 'validation_error' && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-xl w-full mx-4 shadow-2xl relative">
+            {/* Close button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+            
+            <div className="text-center">
+              <div className="flex justify-center mb-4">
+                <AlertCircle className="w-16 h-16 text-red-600" />
+              </div>
+              <h3 className="font-serif text-2xl font-bold text-slate-800 mb-4">
+                Please fill in all required fields
+              </h3>
+              {/* <p className="font-sans text-slate-600 mb-6">
+                The following information is required to proceed with your reservation:
+              </p>
+              <div className="text-left bg-red-50 rounded-lg p-4 mb-6">
+                <ul className="space-y-2">
+                  {validationErrors.map((error, index) => (
+                    <li key={index} className="flex items-center text-red-700 font-sans">
+                      <div className="w-2 h-2 bg-red-600 rounded-full mr-3"></div>
+                      {error}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <p className="font-sans text-slate-500 text-sm">
+                Please fill out all required fields and try again.
+              </p> */}
             </div>
           </div>
         </div>

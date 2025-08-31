@@ -14,10 +14,10 @@ const AboutPage = () => {
         <div className="text-left mt-10 mb-10">
 
           <h1 className="font-serif text-4xl md:text-4xl font-bold text-cafe-navy mb-2 relative leading-tight">
-            About French Cafe
+            About Cafe Lumière
           </h1>
           <p className="font-sans text-xl text-gray-600 max-w-5xl leading-relaxed font-light">
-            The story of a French passion for coffee and the timeless art of café living
+            The story of a French passion for coffee and the timeless art of cafe living
           </p>
         </div>
         
@@ -30,9 +30,9 @@ const AboutPage = () => {
               <div className="bg-white rounded-2xl py-20 px-8 shadow-xl">
 
                 <p className="font-sans text-gray-700 leading-relaxed text-lg mb-6">
-                  Founded in 1995 in Colombo, French Cafe was created with a simple dream:
+                  Founded in 1995 in Colombo, Cafe Lumière was established with a simple dream:
                   to bring the charm of traditional Parisian cafés to Sri Lanka. Inspired by
-                  the elegance of French café culture, we blended it with the warmth of local
+                  the elegance of French cafe culture, we blended it with the warmth of local
                   hospitality to create a space where people can relax, connect, and enjoy
                   timeless flavors.
                 </p>
