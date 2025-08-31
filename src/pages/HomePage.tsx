@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
-import { ArrowRight, Star, Clock, Heart, Users, X, MapPin, Camera, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Star, Clock, Heart, Users, X, Sparkles } from 'lucide-react';
 
 // Type definitions
 interface CategoryDetail {
@@ -41,7 +42,7 @@ const DetailModal: React.FC<DetailModalProps> = ({ isOpen, onClose, category }) 
         'Exclusive French drinks and dessert combos available',
         'Pet-friendly area for those bringing furry companions'
       ],
-      description: 'Immerse yourself in authentic French culture with our weekly live music nights featuring talented local artists performing classic French chansons and smooth jazz melodies in our intimate café setting.'
+      description: 'Immerse yourself in authentic French culture with our weekly live music nights featuring talented local artists performing classic French chansons and smooth jazz melodies in our intimate cafe setting.'
     },
     'sweetheart': {
       title: 'Sweetheart Saturday',
@@ -70,7 +71,7 @@ const DetailModal: React.FC<DetailModalProps> = ({ isOpen, onClose, category }) 
       description: 'Create the perfect moment for your life-changing question with our comprehensive proposal package, designed to make your special moment absolutely magical and unforgettable.'
     },
     'pet': {
-      title: 'Pet-Friendly Outdoor Lounge – "Amour des Paws"',
+      title: 'Pet-Friendly Outdoor Lounge',
       emoji: '🐾',
       image: 'images/petFriendlyLounge.jpg',
       points: [
@@ -80,7 +81,7 @@ const DetailModal: React.FC<DetailModalProps> = ({ isOpen, onClose, category }) 
         'Cozy romantic setting perfect for pet lovers',
         'Safe, enclosed area where pets can relax freely'
       ],
-      description: 'At Café Lumière, love includes our furry friends. Our "Amour des Paws" outdoor lounge provides a beautiful space where couples and their pets can enjoy quality time together in comfort.'
+      description: 'At Cafe Lumière, love includes our furry friends. Our "Amour des Paws" outdoor lounge provides a beautiful space where couples and their pets can enjoy quality time together in comfort.'
     }
   };
 
@@ -88,53 +89,91 @@ const DetailModal: React.FC<DetailModalProps> = ({ isOpen, onClose, category }) 
   if (!detail) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl">
-        {/* Header with Image */}
-        <div className="relative h-80 overflow-hidden rounded-t-3xl">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
+  <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+      <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl transform animate-in zoom-in-95 duration-300 border border-gray-100">
+        {/* Header with Enhanced Image */}
+        <div className="relative h-96 overflow-hidden">
+          <div
+            className="absolute inset-0 bg-cover bg-center transform hover:scale-105 transition-transform duration-700"
             style={{ backgroundImage: `url("${detail.image}")` }}
           ></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
           
-          {/* Close Button */}
-          <button 
+          {/* Decorative Elements */}
+          <div className="absolute top-8 left-8 opacity-30">
+            <Sparkles className="h-8 w-8 text-white animate-pulse" />
+          </div>
+          
+          {/* Enhanced Close Button */}
+          <button
             onClick={onClose}
-            className="absolute top-6 right-6 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+            className="absolute top-6 right-6 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 hover:rotate-90 group border border-white/20"
           >
-            <X className="h-6 w-6" />
+            <X className="h-6 w-6 transition-transform duration-300" />
           </button>
 
-          {/* Title Overlay */}
-          <div className="absolute bottom-8 left-8 text-white">
-            <div className="text-4xl mb-2">{detail.emoji}</div>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-2">{detail.title}</h2>
+          {/* Enhanced Title Overlay */}
+          <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 to-transparent">
+            <div className="max-w-3xl">
+              <div className="text-5xl mb-4 animate-bounce">{detail.emoji}</div>
+              <h2 className="font-serif text-4xl md:text-4xl font-bold mb-3 text-white leading-tight">
+                {detail.title}
+              </h2>
+              <div className="h-1 w-24 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full"></div>
+            </div>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="p-8 md:p-12">
-          <p className="font-sans text-lg text-gray-700 text-justify leading-relaxed mb-8">
-            {detail.description}
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
-            {/* Features List */}
-            <div>
-              <h3 className="font-serif text-2xl font-bold text-cafe-navy mb-6 flex items-center">
-                <Star className="h-6 w-6 text-cafe-gold mr-3" />
-                What's Included
-              </h3>
-              <div className="space-y-4">
-                {detail.points.map((point: string, index: number) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 w-2 h-2 bg-cafe-wine rounded-full mt-3"></div>
-                    <p className="font-sans text-gray-700 leading-relaxed">{point}</p>
-                  </div>
-                ))}
-              </div>
+        {/* Enhanced Content */}
+        <div className="overflow-y-auto max-h-[35vh]">
+          <div className="p-8 md:p-12 bg-gradient-to-b from-white to-gray-50/50">
+            {/* Description with Enhanced Typography */}
+            <div className="mb-10">
+              <p className="font-light text-justify text-xl text-gray-700 leading-relaxed mb-5 ">
+                {detail.description}
+              </p>
             </div>
+
+            {/* Enhanced Features Section */}
+            <div className="relative">
+              {/* Decorative background pattern */}
+              <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full opacity-30 blur-xl"></div>
+              
+              <div className="relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                <h3 className="font-serif text-3xl font-bold text-gray-800 mb-8 flex items-center">
+                  <div className="bg-gradient-to-r from-amber-400 to-orange-500 p-3 rounded-xl mr-4 shadow-lg">
+                    <Star className="h-7 w-7 text-white" />
+                  </div>
+                  <span className="bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                    What's Included
+                  </span>
+                </h3>
+                
+                <div className="grid gap-6">
+                  {detail.points.map((point, index) => (
+                    <div 
+                      key={index} 
+                      className="flex items-start space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 group hover:shadow-md hover:scale-[1.02]"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <div className="flex-shrink-0 relative">
+                        {/* Animated dot */}
+                        <div className="w-3 h-3 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full mt-2 group-hover:scale-125 transition-transform duration-300 shadow-lg">
+                          <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-ping opacity-20"></div>
+                        </div>
+                      </div>
+                      <p className="font-medium text-gray-700 leading-relaxed text-lg group-hover:text-gray-800 transition-colors duration-300">
+                        {point}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Bottom decorative element */}
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-tl from-orange-100 to-amber-100 rounded-full opacity-20 blur-2xl"></div>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -180,7 +219,7 @@ const HomePage: React.FC = () => {
         <div className="absolute top-20 left-20 w-32 h-32 bg-cafe-gold/20 rounded-full blur-2xl animate-pulse"></div>
         <div className="absolute bottom-32 right-32 w-48 h-48 bg-cafe-wine/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
 
-        <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
+        <div className="relative z-10 text-center text-white px-4 max-w-5xl mt-10 mx-auto">
           <h1 className="font-serif text-4xl md:text-8xl font-bold mt-20 mb-5 animate-slide-up bg-gradient-to-r from-white via-cafe-cream to-white bg-clip-text text-transparent leading-tight">
             Cafe Lumière
           </h1>
@@ -191,27 +230,36 @@ const HomePage: React.FC = () => {
             Where every cup tells a story and every moment becomes a cherished memory
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button className="group inline-flex items-center space-x-3 bg-gradient-to-r from-cafe-wine via-cafe-wine to-cafe-wine/90 hover:from-cafe-wine/90 hover:via-cafe-wine hover:to-cafe-wine text-white px-12 py-5 rounded-full font-sans font-semibold text-xl transition-all duration-500 transform hover:scale-110 hover:shadow-2xl shadow-xl border-2 border-white/20 hover:border-cafe-gold/50">
-              <span>Explore Our Menu</span>
-              <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
-            <button className="group inline-flex items-center space-x-3 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white px-12 py-5 rounded-full font-sans font-semibold text-xl transition-all duration-500 transform hover:scale-110 hover:shadow-2xl shadow-xl border-2 border-white/30 hover:border-cafe-gold/70">
-              <span>Reserve Table</span>
-              <Users className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
-            </button>
+
+            <Link to="/menu">
+              <button className="group inline-flex items-center space-x-3 bg-gradient-to-r from-cafe-wine via-cafe-wine to-cafe-wine/90 hover:from-cafe-wine/90 hover:via-cafe-wine hover:to-cafe-wine text-white px-12 py-5 rounded-full font-sans font-semibold text-xl transition-all duration-500 transform hover:scale-110 hover:shadow-2xl shadow-xl border-2 border-white/20 hover:border-cafe-gold/50">
+                <span>Explore Our Menu</span>
+                <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+            </Link>
+
+            <Link to="/reservation">
+              <button className="group inline-flex items-center space-x-3 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white px-12 py-5 rounded-full font-sans font-semibold text-xl transition-all duration-500 transform hover:scale-110 hover:shadow-2xl shadow-xl border-2 border-white/30 hover:border-cafe-gold/70">
+                <span>Reserve Table</span>
+                <Users className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
+              </button>
+            </Link>
+
           </div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
+        <a href = "#features">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
+            </div>
           </div>
-        </div>
+        </a>
       </section>
 
       {/* Discover What Makes Us Different Section */}
-      <section className="pt-32 pb-0 bg-gradient-to-br from-cafe-cream/20 via-white to-cafe-cream/20 relative overflow-hidden">
+      <section id="features" className="pt-32 pb-0 bg-gradient-to-br from-cafe-cream/20 via-white to-cafe-cream/20 relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-20 right-20 w-40 h-40 bg-gradient-to-br from-cafe-gold/15 to-cafe-wine/10 rounded-full blur-2xl animate-pulse"></div>
         <div className="absolute bottom-20 left-20 w-56 h-56 bg-gradient-to-br from-cafe-wine/10 to-cafe-gold/15 rounded-full blur-3xl animate-pulse delay-500"></div>
@@ -245,7 +293,7 @@ const HomePage: React.FC = () => {
                   Enjoy soulful French jazz and acoustic evenings, with live performers setting the perfect mood for a cozy escape filled with music, laughter, and fine coffee.
                 </p>
                 <div className="flex justify-end">
-                  <button 
+                  <button
                     onClick={() => handleLearnMore('music')}
                     className="group/btn inline-flex items-center space-x-2 bg-cafe-wine hover:bg-cafe-wine/90 text-white px-6 py-3 rounded-full font-sans font-semibold transition-all duration-300 transform hover:scale-105"
                   >
@@ -274,7 +322,7 @@ const HomePage: React.FC = () => {
                   Celebrate love with our exclusive couple's menu, paired with a cozy candlelight setting that creates the perfect ambiance for romance and unforgettable memories.
                 </p>
                 <div className="flex justify-end">
-                  <button 
+                  <button
                     onClick={() => handleLearnMore('sweetheart')}
                     className="group/btn inline-flex items-center space-x-2 bg-cafe-wine hover:bg-cafe-wine/90 text-white px-6 py-3 rounded-full font-sans font-semibold transition-all duration-300 transform hover:scale-105"
                   >
@@ -303,7 +351,7 @@ const HomePage: React.FC = () => {
                   Let us create the perfect backdrop for your special 'Yes' moment, blending Parisian elegance with intimate charm to make your proposal truly unforgettable.
                 </p>
                 <div className="flex justify-end">
-                  <button 
+                  <button
                     onClick={() => handleLearnMore('proposal')}
                     className="group/btn inline-flex items-center space-x-2 bg-cafe-wine hover:bg-cafe-wine/90 text-white px-6 py-3 rounded-full font-sans font-semibold transition-all duration-300 transform hover:scale-105"
                   >
@@ -332,7 +380,7 @@ const HomePage: React.FC = () => {
                   Bring along your furry friend and unwind in our charming outdoor café garden, where both you and your pet can relax, play, and enjoy the serene Parisian-inspired ambiance together.
                 </p>
                 <div className="flex justify-end">
-                  <button 
+                  <button
                     onClick={() => handleLearnMore('pet')}
                     className="group/btn inline-flex items-center space-x-2 bg-cafe-wine hover:bg-cafe-wine/90 text-white px-6 py-3 rounded-full font-sans font-semibold transition-all duration-300 transform hover:scale-105"
                   >
@@ -404,10 +452,10 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Detail Modal */}
-      <DetailModal 
-        isOpen={modalOpen} 
-        onClose={closeModal} 
-        category={selectedCategory} 
+      <DetailModal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        category={selectedCategory}
       />
     </div>
   );
