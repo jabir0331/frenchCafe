@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Coffee, Croissant, Utensils, Clock, Star, Sandwich, UtensilsCrossed } from 'lucide-react';
+import { Coffee, Croissant, Utensils, Star, Sandwich, UtensilsCrossed } from 'lucide-react';
 
 const MenuPage = () => {
   const [activeCategory, setActiveCategory] = useState('coffee');
