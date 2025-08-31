@@ -1,4 +1,4 @@
-# Café Lumière - Website
+# Cafe Lumière - Website
 
 A sophisticated, responsive website for Cafe Lumière, an authentic French cafe experience in Colombo, Sri Lanka.
 
@@ -87,6 +87,7 @@ The application will open in your browser at `http://localhost:5173`.
 
 ## 🤝 Freelance Information
 Developed end-to-end (design, frontend development, and deployment) by M.N.N. Jabir as a freelance project.
+
 
 
 
