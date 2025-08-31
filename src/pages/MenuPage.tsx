@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Coffee, Croissant, Utensils, Clock, Star, Sandwich } from 'lucide-react';
+import { Coffee, Croissant, Utensils, Clock, Star, Sandwich, UtensilsCrossed } from 'lucide-react';
 
 const MenuPage = () => {
   const [activeCategory, setActiveCategory] = useState('coffee');
@@ -48,6 +48,47 @@ const MenuPage = () => {
         { name: "Ratatouille", description: 'Slow-cooked vegetables in a tomato and herb sauce, served warm', price: 'LKR 1,500', popular: true, image: '/images/menu/lunch/ratatouille.jpg' },
         { name: 'Salmon en Papillote', description: 'Salmon baked in parchment paper with vegetables and herbs', price: 'LKR 1,600', popular: false, image: '/images/menu/lunch/salmonEnPapillote.jpg' },
       ]
+    },
+    dinner: {
+      name: 'Dinner',
+      icon: UtensilsCrossed, // you may want to use a different icon here (like a Wine icon 🍷)
+      items: [
+        {
+          name: 'Coq au Vin',
+          description: 'Classic French chicken braised in red wine with mushrooms, onions, and herbs',
+          price: 'LKR 1,800',
+          popular: true,
+          image: '/images/menu/dinner/coqAuVin.jpg'
+        },
+        {
+          name: 'Boeuf Bourguignon',
+          description: 'Slow-cooked beef stew in red wine sauce with root vegetables, rich and hearty',
+          price: 'LKR 2,400',
+          popular: true,
+          image: '/images/menu/dinner/boeufBourguignon.jpg'
+        },
+        {
+          name: 'Duck Confit',
+          description: 'Crispy duck leg confit served with roasted potatoes and seasonal greens',
+          price: 'LKR 2,200',
+          popular: false,
+          image: '/images/menu/dinner/duckConfit.jpg'
+        },
+        {
+          name: 'Steak Frites',
+          description: 'Grilled beef steak with golden French fries and house-made herb butter',
+          price: 'LKR 2,500',
+          popular: true,
+          image: '/images/menu/dinner/steakFrites.jpg'
+        },
+        {
+          name: 'Cassoulet',
+          description: 'Slow-cooked casserole of white beans, and duck - a French countryside classic',
+          price: 'LKR 2,200',
+          popular: false,
+          image: '/images/menu/dinner/cassoulet.jpg'
+        },
+      ]
     }
   };
 
@@ -79,7 +120,7 @@ const MenuPage = () => {
               <button
                 key={key}
                 onClick={() => setActiveCategory(key)}
-                className={`group relative px-20 py-5 rounded-2xl font-sans font-bold text-lg transition-all duration-500 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 ${activeCategory === key
+                className={`group relative px-14 py-5 rounded-2xl font-sans font-bold text-lg transition-all duration-500 transform hover:scale-105 shadow-xl hover:shadow-2xl border-2 ${activeCategory === key
                   ? 'bg-gradient-to-r from-cafe-wine via-cafe-wine to-cafe-wine/90 text-white shadow-2xl border-cafe-wine/50 scale-105'
                   : 'bg-white text-cafe-navy hover:bg-gradient-to-r hover:from-cafe-gold/20 hover:to-cafe-wine/10 hover:text-cafe-wine border-cafe-cream hover:border-cafe-gold/50'
                   }`}
@@ -138,7 +179,7 @@ const MenuPage = () => {
                     <div className="flex items-start space-x-4">
                       <div className="transition-all duration-500 shadow-lg rounded-2xl">
                         {/* <Coffee className="h-10 w-10 text-cafe-navy group-hover:text-cafe-wine transition-colors duration-300" /> */}
-                        <img src = {item.image} className="h-20 w-20 rounded-2xl"/>
+                        <img src={item.image} className="h-20 w-20 rounded-2xl" />
                       </div>
                       <div>
                         <h3 className="font-serif md:text-xl font-bold text-cafe-navy mb-3 group-hover:text-cafe-wine transition-colors duration-500">
@@ -154,7 +195,7 @@ const MenuPage = () => {
                     <span className="font-sans text-2xl font-bold text-cafe-wine bg-gradient-to-r from-cafe-cream/80 to-cafe-gold/20 px-6 py-3 rounded-2xl group-hover:from-cafe-gold/30 group-hover:to-cafe-wine/20 transition-all duration-500 shadow-lg border border-cafe-gold/20">
                       {item.price}
                     </span>
-                    
+
                   </div>
                 </div>
               ))}
