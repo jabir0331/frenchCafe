@@ -67,7 +67,7 @@ const Footer = () => {
 
         <div className="border-t border-cafe-gold/20 mt-8 pt-8 text-center">
           <p className="text-cafe-cream/60 font-sans">
-            © 2025 Café Lumière. All rights reserved.
+            © 2025 Cafe Lumière. All rights reserved.
           </p>
         </div>
       </div>
