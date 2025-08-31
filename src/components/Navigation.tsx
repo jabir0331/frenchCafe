@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, Coffee, Sparkles } from 'lucide-react';
 
 const Navigation = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // Add this hook
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeItem, setActiveItem] = useState('/');
+  // Remove the activeItem state - we'll use location.pathname instead
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +28,6 @@ const Navigation = () => {
 
   const handleNavClick = (path: string) => {
     navigate(path);
-    setActiveItem(path);
     setIsOpen(false);
   };
 
@@ -38,7 +38,6 @@ const Navigation = () => {
           : 'bg-gradient-to-r from-cafe-navy/80 via-cafe-navy/70 to-cafe-navy/60 backdrop-blur-sm'
         }`}
     >
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           {/* Logo Section */}
@@ -65,13 +64,13 @@ const Navigation = () => {
               <button
                 key={item.path}
                 onClick={() => handleNavClick(item.path)}
-                className={`font-sans text-sm font-medium transition-all duration-300 hover:text-cafe-gold-light relative ${activeItem === item.path
+                className={`font-sans text-sm font-medium transition-all duration-300 hover:text-cafe-gold-light relative ${location.pathname === item.path
                     ? 'text-cafe-gold-light'
                     : 'text-cafe-cream'
                   }`}
               >
                 {item.name}
-                {activeItem === item.path && (
+                {location.pathname === item.path && (
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-cafe-gold-light"></span>
                 )}
               </button>
@@ -100,14 +99,14 @@ const Navigation = () => {
               <button
                 key={item.path}
                 onClick={() => handleNavClick(item.path)}
-                className={`block w-full text-left px-6 py-4 text-base font-medium transition-all duration-300 rounded-xl transform hover:scale-105 hover:translate-x-2 ${activeItem === item.path
+                className={`block w-full text-left px-6 py-4 text-base font-medium transition-all duration-300 rounded-xl transform hover:scale-105 hover:translate-x-2 ${location.pathname === item.path
                     ? 'text-cafe-navy bg-gradient-to-r from-cafe-gold-light to-cafe-gold shadow-lg'
                     : 'text-cafe-cream hover:text-cafe-gold-light hover:bg-cafe-gold/20'
                   }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-center space-x-3">
-                  <span className={`w-2 h-2 rounded-full transition-all duration-300 ${activeItem === item.path
+                  <span className={`w-2 h-2 rounded-full transition-all duration-300 ${location.pathname === item.path
                       ? 'bg-cafe-navy animate-pulse'
                       : 'bg-cafe-gold/40'
                     }`}></span>
@@ -121,7 +120,6 @@ const Navigation = () => {
         {/* Animated bottom border */}
         <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-cafe-gold via-cafe-gold-light to-cafe-wine opacity-80"></div>
       </div>
-
 
       {/* Coffee bean decorative elements */}
       <div className="absolute top-2 left-1/4 w-1 h-1 bg-cafe-gold/30 rounded-full animate-pulse"></div>

@@ -39,7 +39,7 @@ const HomePage = () => {
         </video>
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/25"></div>
+        <div className="absolute inset-0 bg-black/10"></div>
 
         {/* Floating decorative elements */}
         <div className="absolute top-20 left-20 w-32 h-32 bg-cafe-gold/20 rounded-full blur-2xl animate-pulse"></div>
